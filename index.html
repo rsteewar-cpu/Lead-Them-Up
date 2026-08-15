@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEAD THEM UP — Coaching &amp; Leadership</title>
+<meta name="description" content="LEAD THEM UP accompagne dirigeants, managers et équipes vers un leadership plus clair, plus solide, plus humain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14261F;
+    --forest:#1F4438;
+    --forest-deep:#132D24;
+    --gold:#C99A3D;
+    --gold-light:#E3C077;
+    --paper:#F4EFE2;
+    --paper-dim:#EAE2CF;
+    --text-dark:#1B2620;
+    --text-light:#F6F1E4;
+    --line: rgba(20,38,31,0.14);
+    --line-light: rgba(246,241,228,0.18);
+    --shadow: 0 20px 50px -25px rgba(19,45,36,0.45);
+    --radius: 2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text-dark);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--forest);
+    opacity:0.75;
+  }
+  .eyebrow.on-dark{color:var(--gold-light);opacity:0.9;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    border-radius:var(--radius);
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    letter-spacing:0.01em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--gold);color:var(--forest-deep);}
+  .btn-primary:hover{background:var(--gold-light);}
+  .btn-ghost{border-color:var(--line);color:var(--text-dark);}
+  .btn-ghost:hover{border-color:var(--forest);}
+  .btn-ghost.on-dark{border-color:var(--line-light);color:var(--text-light);}
+  .btn-ghost.on-dark:hover{border-color:var(--gold-light);color:var(--gold-light);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(244,239,226,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:19px;
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{
+    font-size:13.5px;font-weight:500;color:var(--text-dark);
+    opacity:0.75;transition:opacity .25s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex;align-items:center;}
+  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .burger span{display:block;width:22px;height:2px;background:var(--text-dark);margin:5px 0;}
+
+  /* HERO */
+  .hero{
+    padding:168px 0 100px;
+    background:var(--paper);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(40px,5.4vw,68px);
+    line-height:1.04;
+    color:var(--forest-deep);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .hero p.lede{
+    margin-top:26px;
+    font-size:17.5px;
+    line-height:1.65;
+    color:rgba(27,38,32,0.78);
+    max-width:480px;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+  .hero-stats{
+    display:flex;gap:40px;margin-top:64px;padding-top:28px;border-top:1px solid var(--line);
+  }
+  .stat b{
+    display:block;font-family:'Fraunces',serif;font-size:30px;font-weight:500;color:var(--forest-deep);
+  }
+  .stat span{font-size:12.5px;color:rgba(27,38,32,0.6);letter-spacing:0.02em;}
+
+  /* Ascending signature graphic */
+  .ascent{position:relative;}
+  .ascent svg{width:100%;height:auto;}
+
+  /* MANIFESTO */
+  .manifesto{
+    background:var(--forest-deep);
+    color:var(--text-light);
+    padding:110px 0;
+  }
+  .manifesto-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:start;}
+  .manifesto h2{
+    font-size:clamp(28px,3.2vw,40px);
+    line-height:1.22;
+    color:var(--text-light);
+  }
+  .manifesto h2 em{color:var(--gold-light);font-style:italic;}
+  .manifesto-body p{
+    font-size:16.5px;line-height:1.75;color:rgba(246,241,228,0.82);margin:0 0 20px;
+  }
+  .manifesto-body p:last-child{margin-bottom:0;}
+
+  /* METHOD / STEPS */
+  .method{padding:120px 0;}
+  .method-head{max-width:600px;margin:0 0 64px;}
+  .method-head h2{font-size:clamp(30px,3.6vw,44px);color:var(--forest-deep);margin-top:14px;}
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--line);
+  }
+  .step{
+    padding:34px 26px 34px 0;
+    border-right:1px solid var(--line);
+    position:relative;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .step:last-child{border-right:none;}
+  .step:nth-child(1){transform:translateY(28px);}
+  .step:nth-child(2){transform:translateY(14px);}
+  .step:nth-child(3){transform:translateY(0px);}
+  .step:nth-child(4){transform:translateY(-14px);}
+  .step-num{
+    font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--gold);
+    margin-bottom:18px;display:block;
+  }
+  .step h3{font-size:19px;color:var(--forest-deep);margin-bottom:10px;font-weight:600;}
+  .step p{font-size:14.5px;line-height:1.6;color:rgba(27,38,32,0.72);margin:0;}
+
+  /* SERVICES */
+  .services{background:var(--paper-dim);padding:120px 0;}
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:56px;flex-wrap:wrap;}
+  .services-head h2{font-size:clamp(30px,3.6vw,44px);color:var(--forest-deep);margin-top:14px;max-width:520px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:38px 30px;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent;}
+  .card .mark{
+    width:38px;height:38px;border-radius:50%;background:var(--forest-deep);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  }
+  .card .mark svg{width:18px;height:18px;}
+  .card h3{font-size:20px;color:var(--forest-deep);margin-bottom:12px;}
+  .card p{font-size:14.5px;line-height:1.65;color:rgba(27,38,32,0.72);margin:0 0 20px;}
+  .card .price{
+    font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--gold);
+    padding-top:16px;border-top:1px dashed var(--line);
+  }
+
+  /* TESTIMONIALS */
+  .testimonials{padding:120px 0;}
+  .t-head{max-width:560px;margin-bottom:56px;}
+  .t-head h2{font-size:clamp(30px,3.6vw,44px);color:var(--forest-deep);margin-top:14px;}
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .t-card{
+    background:var(--forest);
+    color:var(--text-light);
+    border-radius:var(--radius);
+    padding:34px 30px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    min-height:260px;
+  }
+  .t-card:nth-child(2){background:var(--forest-deep);}
+  .t-quote{font-family:'Fraunces',serif;font-size:17px;line-height:1.55;font-style:italic;color:var(--text-light);}
+  .t-name{margin-top:26px;font-size:13px;color:var(--gold-light);font-weight:600;}
+  .t-role{font-size:12px;color:rgba(246,241,228,0.6);margin-top:2px;}
+
+  /* CTA / CONTACT */
+  .contact{
+    background:var(--forest-deep);
+    color:var(--text-light);
+    padding:130px 0 100px;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;}
+  .contact h2{font-size:clamp(32px,4vw,52px);color:var(--text-light);line-height:1.1;}
+  .contact h2 em{color:var(--gold-light);font-style:italic;}
+  .contact p.lede{margin-top:22px;font-size:16.5px;line-height:1.65;color:rgba(246,241,228,0.78);max-width:460px;}
+  .contact-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+  .contact-card{
+    background:rgba(246,241,228,0.06);
+    border:1px solid var(--line-light);
+    border-radius:var(--radius);
+    padding:34px;
+  }
+  .contact-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 0;border-bottom:1px solid var(--line-light);
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row span.label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(246,241,228,0.55);}
+  .contact-row a, .contact-row span.value{font-size:14.5px;color:var(--text-light);font-weight:500;}
+  .contact-row a:hover{color:var(--gold-light);}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(246,241,228,0.6);padding:44px 0;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .footer-logo{font-family:'Fraunces',serif;color:var(--text-light);font-size:16px;}
+  .footer-links{display:flex;gap:26px;}
+  .footer-links a{font-size:13px;opacity:0.8;}
+  .footer-links a:hover{opacity:1;color:var(--gold-light);}
+  .footer-note{font-size:12px;margin-top:2px;}
+
+  @media (max-width: 900px){
+    .nav-links,.nav-cta{display:none;}
+    .burger{display:block;}
+    .hero-grid, .manifesto-grid, .contact-grid{grid-template-columns:1fr;}
+    .hero{padding:140px 0 70px;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .step{border-bottom:1px solid var(--line);transform:none !important;}
+    .step:nth-child(2){border-right:none;}
+    .cards,.t-grid{grid-template-columns:1fr;}
+    .services-head{align-items:flex-start;}
+    .hero-stats{gap:26px;flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">LEAD THEM UP<span>.</span></div>
+    <nav class="nav-links">
+      <a href="#methode">Méthode</a>
+      <a href="#services">Services</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">Réserver un appel</a>
+    </div>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); document.querySelector('.nav-cta').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow reveal">Coaching &amp; formation en leadership</p>
+      <h1 class="reveal">On ne dirige pas des équipes.<br>On les fait <em>grandir</em>.</h1>
+      <p class="lede reveal">LEAD THEM UP accompagne dirigeants, managers et équipes à Madagascar et au-delà pour transformer l'autorité en influence, et la pression en clarté. Un accompagnement concret, taillé pour des décisions réelles.</p>
+      <div class="hero-actions reveal">
+        <a href="#contact" class="btn btn-primary">Réserver un appel découverte</a>
+        <a href="#methode" class="btn btn-ghost">Voir la méthode</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="stat"><b>+50</b><span>Dirigeants &amp; managers accompagnés</span></div>
+        <div class="stat"><b>12</b><span>Semaines par parcours en moyenne</span></div>
+        <div class="stat"><b>3</b><span>Formats : solo, équipe, atelier</span></div>
+      </div>
+    </div>
+    <div class="ascent reveal">
+      <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- ascending step bars, echoing the brand's core idea: lifting people up, one level at a time -->
+        <rect x="40"  y="330" width="80" height="60"  fill="#EAE2CF"/>
+        <rect x="140" y="280" width="80" height="110" fill="#D9CBA3"/>
+        <rect x="240" y="210" width="80" height="180" fill="#C99A3D"/>
+        <rect x="340" y="120" width="80" height="270" fill="#1F4438"/>
+        <!-- climbing dots representing a path -->
+        <circle cx="80"  cy="315" r="6" fill="#1F4438"/>
+        <circle cx="180" cy="265" r="6" fill="#1F4438"/>
+        <circle cx="280" cy="195" r="6" fill="#1F4438"/>
+        <circle cx="380" cy="105" r="7" fill="#C99A3D"/>
+        <path d="M80,315 L180,265 L280,195 L380,105" stroke="#1F4438" stroke-width="2" stroke-dasharray="4 6" fill="none" opacity="0.55"/>
+        <!-- small figure rising at the top -->
+        <circle cx="380" cy="80" r="10" fill="none" stroke="#132D24" stroke-width="2.5"/>
+        <line x1="380" y1="90" x2="380" y2="112" stroke="#132D24" stroke-width="2.5"/>
+        <line x1="380" y1="98" x2="368" y2="108" stroke="#132D24" stroke-width="2.5"/>
+        <line x1="380" y1="98" x2="392" y2="108" stroke="#132D24" stroke-width="2.5"/>
+        <line x1="380" y1="112" x2="371" y2="128" stroke="#132D24" stroke-width="2.5"/>
+        <line x1="380" y1="112" x2="389" y2="128" stroke="#132D24" stroke-width="2.5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="wrap manifesto-grid">
+    <div>
+      <p class="eyebrow on-dark reveal">Notre conviction</p>
+      <h2 class="reveal">Un bon leader ne porte pas son équipe.<br>Il lui apprend à <em>tenir debout</em>.</h2>
+    </div>
+    <div class="manifesto-body reveal">
+      <p>Trop de programmes de leadership vendent de la motivation. LEAD THEM UP construit des méthodes : comment déléguer sans perdre le contrôle, comment donner un feedback qui fait avancer plutôt que qui blesse, comment prendre une décision difficile en 24h au lieu de trois semaines.</p>
+      <p>Nous travaillons avec des dirigeants de PME, des responsables d'équipe et des porteurs de projet qui savent déjà où ils veulent aller — et qui ont besoin d'un cadre solide pour y emmener les autres.</p>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="methode">
+  <div class="wrap">
+    <div class="method-head">
+      <p class="eyebrow reveal">La méthode</p>
+      <h2 class="reveal">Quatre paliers, un seul chemin</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <h3>Diagnostic</h3>
+        <p>On cartographie votre situation réelle : votre style de management, les frictions dans l'équipe, les décisions qui traînent.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">02</span>
+        <h3>Plan d'action</h3>
+        <p>Un plan concret sur 90 jours, avec des objectifs mesurables — pas une liste de bonnes intentions.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">03</span>
+        <h3>Accompagnement</h3>
+        <p>Sessions régulières, mises en situation réelles, retours directs. On avance sur vos dossiers, pas sur des cas théoriques.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">04</span>
+        <h3>Envol</h3>
+        <p>Vous gardez le cadre, sans avoir besoin de nous. C'est l'objectif : que votre équipe tienne, même quand vous n'êtes pas dans la pièce.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <div>
+        <p class="eyebrow reveal">Ce que nous proposons</p>
+        <h2 class="reveal">Trois formats, un même niveau d'exigence</h2>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C077" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+        <h3>Coaching individuel</h3>
+        <p>Un accompagnement personnel pour dirigeants et managers, en présentiel ou à distance. Sessions bimensuelles sur 3 à 6 mois.</p>
+        <div class="price">Sur devis</div>
+      </div>
+      <div class="card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C077" stroke-width="2"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 21c0-3.3 2.7-6 6-6M22 21c0-3.3-2.7-6-6-6M9 21c0-3.9 3.1-7 7-7"/></svg></div>
+        <h3>Formation en entreprise</h3>
+        <p>Un programme sur mesure pour votre équipe managériale, construit à partir des vrais dossiers de votre entreprise.</p>
+        <div class="price">Sur devis</div>
+      </div>
+      <div class="card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#E3C077" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M3 9h18M8 4v5"/></svg></div>
+        <h3>Ateliers de leadership</h3>
+        <p>Une demi-journée intensive, en petit groupe, sur un thème précis : feedback, délégation, gestion de conflit.</p>
+        <div class="price">À partir de 3 personnes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="avis">
+  <div class="wrap">
+    <div class="t-head">
+      <p class="eyebrow reveal">Ils ont progressé</p>
+      <h2 class="reveal">Ce que nos clients en disent</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <p class="t-quote">« On m'a appris à trancher au lieu de reporter. Mes réunions durent deux fois moins longtemps. »</p>
+        <div><div class="t-name">Nom du client</div><div class="t-role">Fonction, entreprise</div></div>
+      </div>
+      <div class="t-card reveal">
+        <p class="t-quote">« Le plan sur 90 jours a changé la façon dont mon équipe me voit — et dont je me vois. »</p>
+        <div><div class="t-name">Nom du client</div><div class="t-role">Fonction, entreprise</div></div>
+      </div>
+      <div class="t-card reveal">
+        <p class="t-quote">« Un accompagnement sans discours tout fait. Chaque session repartait de mes vrais problèmes. »</p>
+        <div><div class="t-name">Nom du client</div><div class="t-role">Fonction, entreprise</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow on-dark reveal">Prochaine étape</p>
+      <h2 class="reveal">Prêt à faire <em>grandir</em> votre équipe ?</h2>
+      <p class="lede reveal">Un premier appel de 30 minutes, sans engagement, pour comprendre votre situation et voir si LEAD THEM UP est le bon partenaire pour vous.</p>
+      <div class="contact-actions reveal">
+        <a href="mailto:contact@leadthemup.com" class="btn btn-primary">Écrire un e-mail</a>
+        <a href="https://wa.me/261000000000" class="btn btn-ghost on-dark">WhatsApp</a>
+      </div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-row"><span class="label">E-mail</span><a href="mailto:contact@leadthemup.com">contact@leadthemup.com</a></div>
+      <div class="contact-row"><span class="label">Téléphone / WhatsApp</span><a href="https://wa.me/261000000000">+261 00 000 00 00</a></div>
+      <div class="contact-row"><span class="label">Basé à</span><span class="value">Antananarivo, Madagascar</span></div>
+      <div class="contact-row"><span class="label">Disponibilité</span><span class="value">Lun–Ven, 8h–17h</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-logo">LEAD THEM UP</div>
+      <div class="footer-note">© 2026 LEAD THEM UP. Tous droits réservés.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#methode">Méthode</a>
+      <a href="#services">Services</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('in'));
+  }
+
+  // simple mobile nav toggle styling
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 900px){
+      .nav-links.mobile-open{
+        display:flex; flex-direction:column; gap:18px;
+        position:absolute; top:64px; left:0; right:0;
+        background:var(--paper); padding:24px 32px;
+        border-bottom:1px solid var(--line);
+      }
+      .nav-cta.mobile-open{
+        display:flex; position:absolute; top:calc(100% + 1px); right:32px; margin-top:0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+</body>
+</html>
